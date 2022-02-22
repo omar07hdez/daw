@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CountriesMigration extends Migration
+class OfficesMigration extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CountriesMigration extends Migration
      */
     public function up()
     {
-        Schema::create('countries',function(Blueprint $table){
-            $table->icrements('id');
-            $table->string('country');
+        Schema::create('offices', function(Blueprint $table){
+            $table->increments('id');
+            $table->integer('id_country')->unsigned();
+            $table->string('key');
             $table->timestamps();
-
+            $table->foreign('id_country')->references('id')->on('countries');
+            
         });
-
     }
 
     /**
@@ -29,6 +30,6 @@ class CountriesMigration extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('countries');  
+        Schema::dropIfExists('offices');
     }
 }
